@@ -4,8 +4,8 @@ import datetime
 import wikipedia
 import pyaudio
 
-engine = pyttsx3.init('sapi5') #specify which voice you will want the ai to have
-voices = engine.getProperty('voices') #get the voice, one of two
+engine = pyttsx3.init('sapi5') # specify which voice you will want the ai to have
+voices = engine.getProperty('voices') # get the voice, one of two
 engine.setProperty ('voice', voices[0].id)
 
 def speak(audio):# function to make the ai speak
@@ -17,8 +17,10 @@ def time():# function to tell the time
     time = datetime.datetime.now().strftime("%I:%M:%S")
     print(time)
     speak(f"The current time is {str(time)}")
-    
-def wiki(): #to search on wikipedia
+  
+time() # call function to tell time
+  
+def wiki(): # to search on wikipedia
     speak("What would you like to know?")
     query = input("What would you like to know: \n")
     result = wikipedia.summary(query, sentences=2) #specify how many lines to read
@@ -26,6 +28,8 @@ def wiki(): #to search on wikipedia
     print(result)
     speak(result)
     
+
+
 def talk_to_me():
     # 1. Get input from user, convert to text and store 
     r = sr.Recognizer()
@@ -41,11 +45,14 @@ def talk_to_me():
         print("Analysing..")
         speak(f"You asked {query}")
         print(f"You asked {query}")
+        result = wikipedia.summary(query, sentences=2)
+        print(result)
+        speak(result)
         
     except Exception as e:
         print(e)
         speak(f"Say that again.")
         print(f"Say that again")
 
-
-talk_to_me()
+wiki() # call function to call online search
+talk_to_me() # call function to briefly speak to ai
